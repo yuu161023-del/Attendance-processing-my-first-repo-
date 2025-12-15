@@ -6,12 +6,11 @@ public class Employee {
         this.id = id;
         this.name = name;
     }
-    public Employee(){
-    }
+   
     public int getId(){
         return this.id; 
     }
     public String getName(){
         return this.name;
-    }
+  }
 }

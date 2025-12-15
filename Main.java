@@ -5,13 +5,12 @@ import java.time.format.DateTimeFormatter;
 
 public class Main{
     public static void main(String[] args){
-       AttendanceBasicSystem basic = new AttendanceBasicSystem();
-       AttendanceSystem system = new AttendanceSystem(basic);
+        AttendanceSystem system = new AttendanceSystem();
         Scanner sc = new Scanner(System.in);
         
         
         while (true){
-            System.out.println("--- 勤怠管理 ---");
+            System.out.println("\\n--- 勤怠管理 --");
             System.out.println("1;社員登録");
             System.out.println("2:出勤打刻");  
             System.out.println("3:退勤打刻");
@@ -28,28 +27,25 @@ public class Main{
                   int id = Integer.parseInt(sc.nextLine());
                   System.out.print("名前");
                   String name = sc.nextLine();
-                  if (name.isEmpty()){
+                  if (name == ""){
                     System.out.println("名前が入力されませんでした。");
                     System.out.println("入力しなおしてください。");
                     break;
                   }
-                  if(basic.addEmployees(id, name)){ 
-                    System.out.println(name+"さんの社員登録が完了しました。");
-                  }else{
-                    System.out.println("そのidは既に登録されています。");
-                  }
+                  system.addEmployees(id, name);
+                  System.out.println(name+"さんの社員登録が完了しました。");
                   break;
 
                 case "2":
                   System.out.print("社員ID:");
                   Integer id1 = Integer.parseInt(sc.nextLine());
-                  if(basic.getNameById(id1) == null){
+                  if(system.getNameById(id1) == null){
                     System.out.println("そのidは登録されていません。");
                     break;
                   }else{
                     LocalDateTime time1 = LocalDateTime.now();
-                    basic.clockIn(id1, time1);
-                    System.out.println(basic.getNameById(id1)+"さんが出勤しました。");
+                    system.clockIn(id1, time1);
+                    System.out.println(system.getNameById(id1)+"さんが出勤しました。");
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
                     System.out.println("ただ今の時刻は"+time1.format(formatter)+"です。");
                     break;
@@ -58,13 +54,13 @@ public class Main{
                 case "3":
                   System.out.print("社員ID:");
                   Integer id2 = Integer.parseInt(sc.nextLine());
-                  if(basic.getNameById(id2) == null){
+                  if(system.getNameById(id2) == null){
                     System.out.println("そのidは登録されていません。");
                     break;
                    }
                   LocalDateTime time2 = LocalDateTime.now();
-                  basic.clockOut(id2, time2);
-                  System.out.println(basic.getNameById(id2)+"さんが退勤しました。");
+                  system.clockOut(id2, time2);
+                  System.out.println(system.getNameById(id2)+"さんが退勤しました。");
                   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
                   System.out.println("ただ今の時刻は"+time2.format(formatter)+"です。");
                   break;

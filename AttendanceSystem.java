@@ -62,3 +62,4 @@ public class AttendanceSystem{
         +hours+"時間"+minutes+"分です。" );
     }
 }
+    
